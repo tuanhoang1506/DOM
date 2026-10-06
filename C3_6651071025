@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Insert row in a table</title>
+
+    <!-- Link thư viện jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+<table id="sampleTable" border="1">
+    <tr>
+        <td>Row1 cell1</td>
+        <td>Row1 cell2</td>
+    </tr>
+
+    <tr>
+        <td>Row2 cell1</td>
+        <td>Row2 cell2</td>
+    </tr>
+</table>
+
+<br>
+
+<input type="button" id="insertButton" value="Insert row">
+
+<script>
+$(document).ready(function () {
+
+    $("#insertButton").click(function () {
+
+        // Thêm hàng bằng jQuery
+        $("#sampleTable").append(
+            "<tr>" +
+                "<td>New Row cell1</td>" +
+                "<td>New Row cell2</td>" +
+            "</tr>"
+        );
+
+    });
+
+});
+</script>
+
+</body>
+</html>
