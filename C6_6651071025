@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <style>
+        body {
+            margin: 30px;
+        }
+    </style>
+
+    <title>Count and display items</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+<form>
+
+    Select your favorite Color:
+
+    <select id="mySelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>Blue</option>
+        <option>White</option>
+    </select>
+
+    <input type="button"
+           id="countButton"
+           value="Count and Output all items">
+
+</form>
+
+<script>
+$(document).ready(function () {
+
+    $("#countButton").click(function () {
+
+        var count = $("#mySelect option").length;
+
+        var result = "";
+
+        $("#mySelect option").each(function () {
+            result += $(this).text() + "\n";
+        });
+
+        alert(
+            "Số lượng mục: " + count +
+            "\n\nCác mục:\n" + result
+        );
+
+    });
+
+});
+</script>
+
+</body>
+</html>
