@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Form Validation Exercise</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <style>
+
+        body {
+            margin: 30px;
+            font-family: Arial;
+        }
+
+        .form-container {
+            width: 500px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .row {
+            margin: 10px 0;
+        }
+
+        .row label {
+            display: inline-block;
+            width: 180px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        input[type="text"],
+        select {
+            width: 180px;
+            height: 22px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .error {
+            color: red;
+            margin-left: 10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <h2>Personal Information</h2>
+
+    <form id="registerForm">
+
+        <!-- Name -->
+        <div class="row">
+            <label>Enter name*:</label>
+            <input type="text" id="name">
+        </div>
+
+        <!-- Sex -->
+        <div class="row">
+            <label>Sex*:</label>
+
+            <input type="radio"
+                   name="sex"
+                   value="Male">
+            Male
+
+            <input type="radio"
+                   name="sex"
+                   value="Female">
+            Female
+        </div>
+
+        <!-- Email -->
+        <div class="row">
+            <label>Enter email address*:</label>
+            <input type="text" id="email">
+        </div>
+
+        <!-- Birthdate -->
+        <div class="row">
+            <label>Enter birthday (MM/DD/YYYY)*:</label>
+            <input type="text"
+                   id="birthdate"
+                   placeholder="MM/DD/YYYY">
+        </div>
+
+        <!-- Street -->
+        <div class="row">
+            <label>Enter street address (line 1)*:</label>
+            <input type="text" id="street">
+        </div>
+
+        <!-- City -->
+        <div class="row">
+            <label>Enter city*:</label>
+            <input type="text" id="city">
+        </div>
+
+        <!-- Region -->
+        <div class="row">
+            <label>Select a region*:</label>
+
+            <select id="region">
+
+                <option value="">
+                    -- Select --
+                </option>
+
+                <option value="North">
+                    North
+                </option>
+
+                <option value="Central">
+                    Central
+                </option>
+
+                <option value="South">
+                    South
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- ZIP -->
+        <div class="row">
+            <label>Enter 5-digit ZIP code*:</label>
+            <input type="text" id="zip">
+        </div>
+
+        <div class="buttons">
+
+            <button type="submit">
+                Finished
+            </button>
+
+            <button type="button" id="clear">
+                Clear
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<script>
+
+$(document).ready(function () {
+
+    // =========================
+    // NÚT CLEAR
+    // =========================
+
+    $("#clear").click(function () {
+
+        $("#registerForm")[0].reset();
+
+    });
+
+
+    // =========================
+    // SUBMIT / FINISH
+    // =========================
+
+    $("#registerForm").submit(function (event) {
+
+        event.preventDefault();
+
+
+        // -------------------------
+        // Lấy dữ liệu
+        // -------------------------
+
+        var name = $("#name").val().trim();
+
+        var email = $("#email").val().trim();
+
+        var birthdate = $("#birthdate").val().trim();
+
+        var street = $("#street").val().trim();
+
+        var city = $("#city").val().trim();
+
+        var region = $("#region").val();
+
+        var zip = $("#zip").val().trim();
+
+        var sex = $("input[name='sex']:checked").val();
+
+
+        // -------------------------
+        // Kiểm tra các trường *
+        // -------------------------
+
+        if (name == "") {
+            alert("Enter name không được để trống!");
+            $("#name").focus();
+            return;
+        }
+
+
+        if (!sex) {
+            alert("Vui lòng chọn giới tính!");
+            return;
+        }
+
+
+        if (email == "") {
+            alert("Email không được để trống!");
+            $("#email").focus();
+            return;
+        }
+
+
+        if (birthdate == "") {
+            alert("Ngày sinh không được để trống!");
+            $("#birthdate").focus();
+            return;
+        }
+
+
+        if (street == "") {
+            alert("Địa chỉ không được để trống!");
+            $("#street").focus();
+            return;
+        }
+
+
+        if (city == "") {
+            alert("City không được để trống!");
+            $("#city").focus();
+            return;
+        }
+
+
+        if (region == "") {
+            alert("Vui lòng chọn Region!");
+            $("#region").focus();
+            return;
+        }
+
+
+        if (zip == "") {
+            alert("ZIP Code không được để trống!");
+            $("#zip").focus();
+            return;
+        }
+
+
+        // =========================
+        // KIỂM TRA EMAIL
+        // =========================
+
+        var emailParts = email.split("@");
+
+
+        // Phải có đúng 1 dấu @
+        if (emailParts.length != 2) {
+
+            alert("Email phải có đúng 1 dấu @!");
+
+            $("#email").focus();
+
+            return;
+        }
+
+
+        var account = emailParts[0];
+
+        var domain = emailParts[1];
+
+
+        // Account không được rỗng
+        if (account == "") {
+
+            alert("Tên account trong email không được rỗng!");
+
+            $("#email").focus();
+
+            return;
+        }
+
+
+        // Domain không được rỗng
+        if (domain == "") {
+
+            alert("Domain trong email không được rỗng!");
+
+            $("#email").focus();
+
+            return;
+        }
+
+
+        // Account có nhiều nhất 1 dấu chấm
+        var accountDotCount =
+            (account.match(/\./g) || []).length;
+
+
+        if (accountDotCount > 1) {
+
+            alert(
+                "Phần trước @ chỉ được có nhiều nhất 1 dấu chấm!"
+            );
+
+            $("#email").focus();
+
+            return;
+        }
+
+
+        // Domain phải có ít nhất 1 dấu chấm
+        if (domain.indexOf(".") == -1) {
+
+            alert(
+                "Phần domain phải có ít nhất 1 dấu chấm!"
+            );
+
+            $("#email").focus();
+
+            return;
+        }
+
+
+        // =========================
+        // KIỂM TRA NGÀY SINH
+        // =========================
+
+        var datePattern =
+            /^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/;
+
+
+        var match = birthdate.match(datePattern);
+
+
+        if (!match) {
+
+            alert(
+                "Ngày sinh phải có dạng MM/DD/YYYY hoặc MM-DD-YYYY!"
+            );
+
+            $("#birthdate").focus();
+
+            return;
+        }
+
+
+        var month = parseInt(match[1]);
+
+        var day = parseInt(match[2]);
+
+        var year = parseInt(match[3]);
+
+
+        // Tháng từ 1 đến 12
+        if (month < 1 || month > 12) {
+
+            alert("Tháng phải từ 1 đến 12!");
+
+            $("#birthdate").focus();
+
+            return;
+        }
+
+
+        // Kiểm tra năm
+        var currentYear =
+            new Date().getFullYear();
+
+
+        if (year >= currentYear) {
+
+            alert(
+                "Năm sinh phải nhỏ hơn năm hiện tại!"
+            );
+
+            $("#birthdate").focus();
+
+            return;
+        }
+
+
+        // Kiểm tra ngày thực tế
+        var date =
+            new Date(year, month - 1, day);
+
+
+        if (
+            date.getFullYear() != year ||
+            date.getMonth() != month - 1 ||
+            date.getDate() != day
+        ) {
+
+            alert("Ngày sinh không hợp lệ!");
+
+            $("#birthdate").focus();
+
+            return;
+        }
+
+
+        // =========================
+        // KIỂM TRA ZIP CODE
+        // =========================
+
+        if (!/^\d{5}$/.test(zip)) {
+
+            alert("ZIP Code phải có đúng 5 số!");
+
+            $("#zip").focus();
+
+            return;
+        }
+
+
+        // =========================
+        // HỢP LỆ
+        // =========================
+
+        alert(
+            "Đăng ký thành công!"
+        );
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
