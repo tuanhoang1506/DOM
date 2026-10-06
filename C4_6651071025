@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Remove items from a dropdown list</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <style>
+        body {
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<form>
+
+    <select id="colorSelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>White</option>
+        <option>Black</option>
+    </select>
+
+    <input type="button"
+           id="removeButton"
+           value="Select and Remove">
+
+</form>
+
+<script>
+$(document).ready(function () {
+
+    $("#removeButton").click(function () {
+
+        $("#colorSelect option:selected").remove();
+
+    });
+
+});
+</script>
+
+</body>
+</html>
