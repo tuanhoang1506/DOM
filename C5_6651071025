@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Display a random image</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <style>
+        body {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div>
+    <button id="jsstyle">Show Image</button>
+</div>
+
+<br>
+
+<div id="imageContainer"></div>
+
+<script>
+$(document).ready(function () {
+
+    $("#jsstyle").click(function () {
+
+        var images = [
+            {
+                src: "http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg",
+                width: 240,
+                height: 160
+            },
+            {
+                src: "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg",
+                width: 320,
+                height: 195
+            },
+            {
+                src: "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg",
+                width: 500,
+                height: 343
+            }
+        ];
+
+        // Chọn số ngẫu nhiên
+        var randomIndex = Math.floor(Math.random() * images.length);
+
+        // Tạo ảnh bằng DOM
+        var image = document.createElement("img");
+
+        image.src = images[randomIndex].src;
+        image.width = images[randomIndex].width;
+        image.height = images[randomIndex].height;
+
+        // Hiển thị bằng jQuery
+        $("#imageContainer").html(image);
+
+    });
+
+});
+</script>
+
+</body>
+</html>
